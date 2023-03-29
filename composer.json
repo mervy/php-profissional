@@ -1,0 +1,21 @@
+{
+    "name": "mervy/clubefullstack-php-profissional",
+    "description": "Aulas do curso PHP Profissional - Clube Full-Stack - https://www.youtube.com/playlist?list=PLyugqHiq-SKfGjQ077FVWc6xiFDQ8ODF0",
+    "license": "GNU",
+    "autoload": {
+        "psr-4": {
+            "Mervy\\PhpPro\\": "app/"
+        },
+        "files": [
+         "app/helpers/constants.php"   
+        ]
+    },
+    "authors": [
+        {
+            "name": "Rogério Soares",
+            "email": "rgrsoares@yahoo.com.br"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

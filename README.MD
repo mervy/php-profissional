@@ -1,3 +1,18 @@
+# Primeira aula
+Criado a estrutura das pastas
+
+# Segunda aula
+Criação do router em `app/router` dos arquivos `router.php` e `routes.php`
+
+# Terceira aula
+- Uso das expressões regulares
+- Usando o site [regexr](https://regexr.com/)
+- Manipulando rotas como:
+`
+'/user/[a-z0-9]+' => 'User@index'
+`
+- Função final:
+`
 <?php
 
 function routes(): array
@@ -42,3 +57,4 @@ function router()
     var_dump($matchUri);
     die();
 }
+`

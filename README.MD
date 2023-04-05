@@ -8,11 +8,11 @@ Criação do router em `app/router` dos arquivos `router.php` e `routes.php`
 - Uso das expressões regulares
 - Usando o site [regexr](https://regexr.com/)
 - Manipulando rotas como:
-`
+```php
 '/user/[a-z0-9]+' => 'User@index'
-`
+```
 - Função final:
-`
+```php
 <?php
 
 function routes(): array
@@ -57,4 +57,40 @@ function router()
     var_dump($matchUri);
     die();
 }
-`
+```
+
+# Terceira aula
+Na quarta aula vamos pegar os parâmetros da url
+` '/user/[0-9]+/name/[a-z]+'=> 'User@show'`
+
+Para isso, usamos o array_diff
+```php
+$arr1 = ['user', '[0-9]+','name','[a-z]+'];
+$arr2 = ['user','2','name','mervy'];
+array_diff($arr2, $arr1);
+
+/*Retorno: array (size=2)
+  1 => int 2
+  3 => string 'mervy' (length=5)
+  */
+```
+No array_diff a ordem dos array importa!
+
+Para comparar usamos o array_keys no índice '0' caso seja uma url
+com parâmetros (not empty);
+
+```php
+if (!empty($matchUri)) {
+    $matchedToGetParams = array_keys($matchUri)[0];
+    $params = array_diff(
+        explode('/', ltrim($uri, '/')),
+        explode('/', ltrim($matchedToGetParams, '/'))
+    );
+}
+/* Saída:
+http://localhost:7777/user/4/name/rogerio
+array (size=2)
+  1 => string '4' (length=1)
+  3 => string 'rogerio' (length=7)
+*/
+```

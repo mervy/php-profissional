@@ -2,7 +2,7 @@
 Criado a estrutura das pastas
 
 # Segunda aula
-Criação do router em `app/router` dos arquivos `router.php` e `routes.php`
+Criação do roteamento em `app/router` com os arquivos `router.php` e `routes.php`
 
 # Terceira aula
 - Uso das expressões regulares
@@ -59,11 +59,12 @@ function router()
 }
 ```
 
-# Terceira aula
-Na quarta aula vamos pegar os parâmetros da url
+# Quarta aula
+Na quarta aula vamos pegar os parâmetros de urls como esta:
+
 ` '/user/[0-9]+/name/[a-z]+'=> 'User@show'`
 
-Para isso, usamos o array_diff
+Para isso, usamos o `array_diff`
 ```php
 $arr1 = ['user', '[0-9]+','name','[a-z]+'];
 $arr2 = ['user','2','name','mervy'];
@@ -74,10 +75,10 @@ array_diff($arr2, $arr1);
   3 => string 'mervy' (length=5)
   */
 ```
-No array_diff a ordem dos array importa!
+No array_diff a ordem dos arrays importam!
 
-Para comparar usamos o array_keys no índice '0' caso seja uma url
-com parâmetros (not empty);
+Para comparar usamos o `array_keys` no índice *'0'* caso seja 
+\n uma url com parâmetros (not empty);
 
 ```php
 if (!empty($matchUri)) {
@@ -93,4 +94,28 @@ array (size=2)
   1 => string '4' (length=1)
   3 => string 'rogerio' (length=7)
 */
+```
+
+#Quinta aula
+Nesta aula iremos pegar os parâmetros da url
+pelo seu nome como `user` e `name`
+
+```php
+
+function paramsFormat($uri, $params)
+{
+    $uri = explode('/', ltrim($uri, '/'));
+    $paramsData = [];
+    foreach ($params as $index => $param) {
+        $paramsData[$uri[$index - 1]] = $param;
+    }
+    return $paramsData;
+}
+/*
+http://localhost:7777/user/14/name/mariabela
+array (size=2)
+  'user' => string '14' (length=2)
+  'name' => string 'mariabela' (length=9)
+*/
+
 ```

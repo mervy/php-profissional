@@ -38,6 +38,16 @@ function params($uri, $matchUri)
     return [];
 }
 
+function paramsFormat($uri, $params)
+{
+    $uri = explode('/', ltrim($uri, '/'));
+    $paramsData = [];
+    foreach ($params as $index => $param) {
+        $paramsData[$uri[$index - 1]] = $param;
+    }
+    return $paramsData;
+}
+
 function router()
 {
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -50,9 +60,11 @@ function router()
     if (empty($matchUri)) {
         $matchUri = regularExpressionMatchArrayRoutes($uri, $routes);
         if (!empty($matchUri)) {
-          $params = params($uri, $matchUri);
-          var_dump($params);
-          die();
+            $params = params($uri, $matchUri);
+            $params =  paramsFormat($uri, $params);
+
+            var_dump($params);
+            die();
         }
     }
 }
